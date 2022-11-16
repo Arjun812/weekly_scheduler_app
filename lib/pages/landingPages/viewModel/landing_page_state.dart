@@ -5,6 +5,8 @@ abstract class LandingPageState {}
 
 class LandingPageInitial extends LandingPageState {}
 
+class LandingPageDbCall extends LandingPageState {}
+
 class LandingPageLoading extends LandingPageState {}
 
 class LandingPageLoaded extends LandingPageState {

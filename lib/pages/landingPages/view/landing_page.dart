@@ -5,6 +5,8 @@ import 'package:weekly_scheduler_app/utils/style/button/primary_button.dart';
 
 import '../../../utils/constants.dart';
 import '../../../utils/style/style.dart';
+import '../../schedulePages/model/schedule_model.dart';
+import '../../schedulePages/viewModel/schedule_page_cubit.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);

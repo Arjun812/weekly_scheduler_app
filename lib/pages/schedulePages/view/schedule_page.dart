@@ -51,11 +51,6 @@ class _SchedulePageState extends State<SchedulePage> {
                       return CircularProgressIndicator();
                     }
                     if (state is SchedulePageLoaded) {
-                      if(load ==false){
-                        BlocProvider.of<SchedulePageCubit>(context).getWeek();
-                        load =true;
-                      }
-
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
 

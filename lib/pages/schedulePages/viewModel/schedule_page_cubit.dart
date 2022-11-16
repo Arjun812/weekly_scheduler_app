@@ -14,16 +14,14 @@ class SchedulePageCubit extends Cubit<SchedulePageState> {
 Future<void> getWeek()async{
     emit(SchedulePageLoading());
     try{
-      final box= await Hive.openBox<Week>(dataBoxName);
-      scheduleNotifier!.value.clear();
-      scheduleNotifier!.value.addAll(box.values);
-      scheduleNotifier!.notifyListeners();
-      if(scheduleNotifier!.value.length != 7){
-        await addSchedule();
-      }
-
+      // final box= await Hive.openBox<Week>(dataBoxName);
+      // scheduleNotifier!.value.clear();
+      // scheduleNotifier!.value.addAll(box.values);
+      // scheduleNotifier!.notifyListeners();
+      // if(scheduleNotifier!.value.length != 7){
+      //   await addSchedule();
+      // }
         await getSchedule();
-      // List?  data = Hive.box<Week>(dataBoxName).values.toList();
      List<Week>? data = scheduleNotifier?.value.toList();
       emit(SchedulePageLoaded(data));
     }catch(e){

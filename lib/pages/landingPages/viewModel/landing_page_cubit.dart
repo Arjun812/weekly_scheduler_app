@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
+import 'package:weekly_scheduler_app/pages/schedulePages/viewModel/schedule_page_cubit.dart';
 
 import '../../../data/database.dart';
 import '../../../main.dart';
@@ -16,6 +18,14 @@ class LandingPageCubit extends Cubit<LandingPageState> {
 
   void getDetails()async{
     Map<String,List<bool>>? freeDetails;
+    emit(LandingPageDbCall());
+    final box= await Hive.openBox<Week>(dataBoxName);
+    scheduleNotifier!.value.clear();
+    scheduleNotifier!.value.addAll(box.values);
+    scheduleNotifier!.notifyListeners();
+    if(scheduleNotifier!.value.length != 7){
+      await addSchedule();
+    }
     emit(LandingPageLoading());
     try{
       freeDetails?.clear();

@@ -10,13 +10,9 @@ List<String>? week = ['Week','Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 Future<void> addSchedule()async{
   Week? week1;
    List? data ;
-  //List<Week>?  data = Hive.box<Week>(dataBoxName).values.toList();
   final box= await Hive.openBox<Week>(dataBoxName);
-   // box.clear();
-
  data = box.values.toList();
-  // data.clear();
-  if(data.length<=6||data.length>=8){
+ if(data.length<=6||data.length>=8){
     box.clear();
     data.clear();
     for(int i=0 ; i<week!.length ; i++){
