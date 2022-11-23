@@ -26,6 +26,8 @@ Future<void> addSchedule()async{
   scheduleNotifier!.value.clear();
   scheduleNotifier!.value.addAll(box.values);
 }
+
+
 Future<void> updateSchedule(Week week,int id)async{
   final box= await Hive.openBox<Week>(dataBoxName);
   box.putAt(id, week);
@@ -37,3 +39,5 @@ Future<void> getSchedule()async{
    scheduleNotifier!.value.addAll(box.values);
   scheduleNotifier!.notifyListeners();
 }
+
+

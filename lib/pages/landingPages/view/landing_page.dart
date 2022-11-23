@@ -50,6 +50,7 @@ class LandingPage extends StatelessWidget {
                                     ),
                                   ))),
                         ),
+                        Text(state.lastUpdate.toString()),
                         PrimaryButton(
                             height: 50,
                             width: 300,

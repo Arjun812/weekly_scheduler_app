@@ -10,6 +10,7 @@ import 'data/database.dart';
 import 'data/route.dart';
 
 const String dataBoxName = "week";
+const String updateBoxName = "latests";
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
 

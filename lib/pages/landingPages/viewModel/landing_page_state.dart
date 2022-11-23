@@ -12,6 +12,7 @@ class LandingPageLoading extends LandingPageState {}
 class LandingPageLoaded extends LandingPageState {
  final List<String>? data;
  final bool? busy;
+ final String? lastUpdate;
 
-  LandingPageLoaded(this.data, this.busy);
+  LandingPageLoaded(this.data, this.busy, this.lastUpdate);
 }

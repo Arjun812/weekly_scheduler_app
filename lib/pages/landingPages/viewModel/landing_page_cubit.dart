@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weekly_scheduler_app/pages/schedulePages/viewModel/schedule_page_cubit.dart';
 
 import '../../../data/database.dart';
@@ -20,6 +21,7 @@ class LandingPageCubit extends Cubit<LandingPageState> {
     Map<String,List<bool>>? freeDetails;
     emit(LandingPageDbCall());
     final box= await Hive.openBox<Week>(dataBoxName);
+
     scheduleNotifier!.value.clear();
     scheduleNotifier!.value.addAll(box.values);
     scheduleNotifier!.notifyListeners();
@@ -40,8 +42,11 @@ class LandingPageCubit extends Cubit<LandingPageState> {
         busy= checkBusy(getBool: data[i].shift);
         busyList.addAll([busy!]);
       }
+      // String secondData =
+      final prefs = await SharedPreferences.getInstance();
+     String? last =  await prefs.getString('update');
        busy = busyList.any((element) => element == false);
-      emit(LandingPageLoaded(text,busy));
+      emit(LandingPageLoaded(text,busy,last));
     }catch(e){
       if (kDebugMode) {
         print(e.toString());
@@ -73,5 +78,9 @@ class LandingPageCubit extends Cubit<LandingPageState> {
       result = 'whole ${day!}';
     }
     return result;
+  }
+
+  String? lastUpdatedLogic(){
+
   }
 }

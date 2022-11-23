@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weekly_scheduler_app/data/arguments.dart';
 import 'package:weekly_scheduler_app/pages/schedulePages/viewModel/schedule_page_cubit.dart';
 import 'package:weekly_scheduler_app/widgets/shift_button.dart';
@@ -72,6 +73,9 @@ class _DayScheduleCardState extends State<DayScheduleCard> {
                               widget.week!.shift[1],
                               widget.week!.shift[2]
                             ]));
+                        final prefs = await SharedPreferences.getInstance();
+                        await prefs.setString('update', '${widget.week!.day} Morning is last scheduled');
+
                         BlocProvider.of<SchedulePageCubit>(context).getWeek();
                         // box.delete(widget.week!.day,);
                       },
@@ -100,6 +104,8 @@ class _DayScheduleCardState extends State<DayScheduleCard> {
                               _current,
                               widget.week!.shift[2]
                             ]));
+                        final prefs = await SharedPreferences.getInstance();
+                        await prefs.setString('update', '${widget.week!.day} Noon is last scheduled');
                         BlocProvider.of<SchedulePageCubit>(context).getWeek();
                       },
                       child: AbsorbPointer(
@@ -127,6 +133,10 @@ class _DayScheduleCardState extends State<DayScheduleCard> {
                               widget.week!.shift[1],
                               _current
                             ]));
+                        // Obtain shared preferences.
+                        final prefs = await SharedPreferences.getInstance();
+                        await prefs.setString('update', '${widget.week!.day} afternoon is last scheduled');
+
                         BlocProvider.of<SchedulePageCubit>(context).getWeek();
                       },
                       child: AbsorbPointer(
